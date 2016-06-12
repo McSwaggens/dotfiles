@@ -1,0 +1,17 @@
+//Personal config created by Daniel Jones
+{
+    "r.cursorStyle": "block",
+    "editor.tabSize": 4,
+    "editor.fontFamily": "Menlo",
+    "explorer.autoReveal": false,
+    "telemetry.enableTelemetry": false,
+    "telemetry.enableCrashReporter": false,
+    "terminal.integrated.fontFamily": "Menlo",
+    "editor.insertSpaces": false,
+    "editor.cursorBlinking": "visible",
+    "editor.renderWhitespace": true,
+    "editor.wordBasedSuggestions": false,
+    "editor.quickSuggestionsDelay": 0,
+    "editor.scrollBeyondLastLine": false,
+    "editor.trimAutoWhitespace": false
+}
