@@ -8,7 +8,7 @@
 ZSH_THEME="theunraveler"
 
 clr() { clear }
-alias dirs="dirs -h"
+alias dirs="dirs -v"
 alias push="pushd"
 alias pop="popd"
 
