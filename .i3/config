@@ -34,7 +34,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+q kill
 
 #Search
-bindsym $mod+s exec rofi -show run -bc "#fac863" -bg "#222222" -hlfg "#222222" -hlbg "#FAC863" -fg "#D8DEE9" -padding 40 -bw 3 -eh 1
+bindsym $mod+s exec rofi -show run -bc "#fac863" -bg "#080808" -hlfg "#080808" -hlbg "#FAC863" -fg "#D8DEE9" -padding 40 -bw 3 -eh 1
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -151,11 +151,7 @@ new_window 1pixel
 new_window pixel 2
 
 #Gaps
-gaps inner 10
+gaps inner 4
 
 #Executes
-exec_always feh --bg-scale /home/daniel/Pictures/Wallpapers/ElCapitan.png
-# exec_always compton
-# exec_always compton -f
-# exec_always compton -cCGfF -o 0.10 -O 200 -I 200 -t 0 -l 0 -r 3 -D2 -m 0.1
-# exec_always compton --opengl --sw-opti opengl-swc --paint-on-overlay -G
+exec_always feh --bg-scale /home/daniel/Pictures/Wallpapers/Wallpaper_background.jpg
