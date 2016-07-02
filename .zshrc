@@ -43,7 +43,7 @@ upper()
 		ORIGINAL=$i
 		RENAME="$(echo $i | tr '[:lower:]' '[:upper:]')"
 		if [ -f $RENAME ]; then
-			echo "${RED}File${CLEAR} ${RENAME} ${RED}already exists"
+			echo "${RED}File${CLEAR} ${RENAME} ${RED}already exists${CLEAR}"
 		else
 			mv $ORIGINAL $RENAME
 			echo "${ORIGINAL} -> ${RENAME}"
@@ -60,7 +60,7 @@ lower()
 		ORIGINAL=$i
 		RENAME="$(echo $i | tr '[:upper:]' '[:lower:]')"
 		if [ -f $RENAME ]; then
-			echo "${RED}File${CLEAR} ${RENAME} ${RED}already exists"
+			echo "${RED}File${CLEAR} ${RENAME} ${RED}already exists${CLEAR}"
 		else
 			mv $ORIGINAL $RENAME
 			echo "${ORIGINAL} -> ${RENAME}"
