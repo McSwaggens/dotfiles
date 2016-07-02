@@ -1,3 +1,6 @@
+#Colors
+CLEAR='\033[0m'
+RED='\033[0;31m'
 export ZSH=/home/$USER/.oh-my-zsh
 
 JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64/jre/"
@@ -25,6 +28,45 @@ alias ipa="curl https://api.ipify.org"
 
 #----[LOG->GIT LOG]----#
 alias log="git log"
+
+#----[PUSH->GIT PUSH]----#
+alias push="git push"
+
+#----[PULL->GIT PULL]----#
+alias pull="git pull"
+
+#----[UPPER - CONVERT THE FILE(S) TO UPPER CASE]----#
+upper()
+{
+	for i in "$@"
+	do
+		ORIGINAL=$i
+		RENAME="$(echo $i | tr '[:lower:]' '[:upper:]')"
+		if [ -f $RENAME ]; then
+			echo "${RED}File${CLEAR} ${RENAME} ${RED}already exists"
+		else
+			mv $ORIGINAL $RENAME
+			echo "${ORIGINAL} -> ${RENAME}"
+		fi
+	done
+}
+
+
+#----[LOWER - CONVERT THE FILE(S) TO LOWER CASE]----#
+lower()
+{
+	for i in "$@"
+	do
+		ORIGINAL=$i
+		RENAME="$(echo $i | tr '[:upper:]' '[:lower:]')"
+		if [ -f $RENAME ]; then
+			echo "${RED}File${CLEAR} ${RENAME} ${RED}already exists"
+		else
+			mv $ORIGINAL $RENAME
+			echo "${ORIGINAL} -> ${RENAME}"
+		fi
+	done
+}
 
 #----[tm TIME]----#
 alias tm="date +"%r""
@@ -63,7 +105,7 @@ cputemp()
 
 
 alias dirs="dirs -h"
-alias push="pushd"
+#alias push="pushd"
 alias pop="popd"
 
 plugins=(git)
