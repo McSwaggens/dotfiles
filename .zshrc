@@ -1,7 +1,7 @@
 #Colors
 CLEAR='\033[0m'
 RED='\033[0;31m'
-export ZSH=/home/$USER/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64/jre/"
 
