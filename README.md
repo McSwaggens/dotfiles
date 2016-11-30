@@ -1,10 +1,3 @@
-:octocat: __What is Suzi?__
-
-Suzi is a bunch of configs ranging from a `.zshrc` config to IDE configs like `vscode`
-
-
-
-
 __Requirements__
 
 - ZSH `sudo apt-get install zsh`
