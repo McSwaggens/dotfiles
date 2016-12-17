@@ -18,23 +18,32 @@ set $base0C #97e0ff
 set $base0D #97bbf7
 set $base0E #c0b7f9
 set $base0F #fcc09e
+
+
+
+set $bar_bg #2c2f34
+set $bar_fg #cccccc
+set $bar_hl #ffffff
+set $bar_nt #101010
+set $win_hl #ffffffdd
+set $win_bg #292929
   
 set $bg-color #2f343f
 set $text-color #f3f4f5
 
 #Font
-font pango:System San Francisco Display 10
+#font pango:System San Francisco Display 10
 
 floating_modifier $mod
 
 # Terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec gnome-terminal
 
 # Close Window
 bindsym $mod+q kill
 
 #Search
-bindsym $mod+s exec rofi -show run -bc "#fac863" -bg "#080808" -hlfg "#080808" -hlbg "#FAC863" -fg "#D8DEE9" -padding 40 -bw 3 -eh 1
+bindsym $mod+s exec rofi -show run -config ~/.local/rofi/config
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -67,6 +76,8 @@ bindsym $mod+Shift+space floating toggle
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 
+bindsym $mod+t exec i3-sensible-terminal
+
 # switch to workspace
 bindsym $mod+1 workspace 1
 bindsym $mod+2 workspace 2
@@ -92,8 +103,8 @@ bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
 #Audio
-bindsym XF86AudioRaiseVolume exec amixer -q set Master 2dB+ unmute
-bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute
+bindsym XF86AudioRaiseVolume exec amixer set Master 4%+ unmute
+bindsym XF86AudioLowerVolume exec amixer set Master 5%- unmute
 bindsym XF86AudioMute exec amixer -q set Master toggle
 
 # reload the configuration file
@@ -104,10 +115,36 @@ bindsym $mod+Shift+r restart
 
 
 #Lock screen
-bindsym $mod+l exec i3lock -n -i ~/Pictures/Wallpapers/elcap_blurred_scaled.png
+#bindsym $mod+l exec i3lock -n -i ~/Pictures/Wallpapers/elcap_blurred_scaled.png
 
 # Log out
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+bar {
+        status_command ~/bin/conky-i3bar.sh
+	i3bar_command i3bar -t     
+	position bottom
+	mode dock
+        font pango:Awesome 15, DejaVu Sans Mono 15
+	tray_output none 
+	#hidden_state hide
+	modifier $mod  
+	height 32
+	colors {
+                background $bar_bg
+                statusline $bar_fg 
+                separator  $bar_bg
+
+                #<colorclass>      <border>  <bgrnd>  <text>
+                focused_workspace  $bar_bg   $bar_bg  $bar_hl
+                active_workspace   $bar_bg   $bar_bg  $bar_hl
+                inactive_workspace $bar_bg   $bar_bg  $bar_fg
+                urgent_workspace   $bar_bg   $bar_bg  $bar_nt
+                binding_mode       $bar_bg   $bar_bg  $bar_hl
+   }
+}
+
+
 
 
 #Resize
@@ -140,18 +177,23 @@ bindsym $mod+r mode "resize"
 
 # Widow Colours
 #                         border  background text    indicator
-  client.focused          #FAC863 #FAC863    $base07 $base0F
-  client.focused_inactive $base02 $base02    $base03 $base0F
-  client.unfocused        $base02 $base02    $base03 $base0F
-  client.urgent           $base02 $base08    $base00 $base0F
+client.focused          #FAC863 #FAC863    $base07 $base0F
+client.focused_inactive #333333 #5f676a #ffffff #333333 $win_bg
+client.unfocused        #333333 #222222 #888888 #333333 $win_bg
+client.urgent           #2f343a #900000 #ffffff #2f343a #900000
+client.placeholder #000000 #0c0c0c #ffffff #000000 #0c0c0c
 
-hide_edge_borders both
+exec compton --config ~/.local/compton.conf
+
+#hide_edge_borders both
+
+gaps outer 10
+gaps inner 15
 
 new_window 1pixel
 new_window pixel 2
 
-#Gaps
-gaps inner 4
-
 #Executes
-exec_always feh --bg-scale /home/daniel/Pictures/Wallpapers/Wallpaper_background.jpg
+exec_always feh --bg-scale /home/daniel/Pictures/wallpapers/sierra.jpg
+
+

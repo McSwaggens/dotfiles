@@ -5,8 +5,24 @@ export ZSH=$HOME/.oh-my-zsh
 
 JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64/jre/"
 
+echo -e "\e[91m@@@@@@@@@@    @@@@@@   @@@@@@@@@@   @@@@@@@@@@    @@@@@@   @@@@@@@  @@@  @@@  "
+echo -e "\e[91m@@@@@@@@@@@  @@@@@@@@  @@@@@@@@@@@  @@@@@@@@@@@  @@@@@@@@  @@@@@@@  @@@  @@@  "
+echo -e "\e[91m@@! @@! @@!  @@!  @@@  @@! @@! @@!  @@! @@! @@!  @@!  @@@    @@!    @@!  @@@  "
+echo -e "\e[91m!@! !@! !@!  !@!  @!@  !@! !@! !@!  !@! !@! !@!  !@!  @!@    !@!    !@!  @!@  "
+echo -e "\e[91m@!! !!@ @!@  @!@!@!@!  @!! !!@ @!@  @!! !!@ @!@  @!@  !@!    @!!    @!@!@!@!  "
+echo -e "\e[91m!@!   ! !@!  !!!@!!!!  !@!   ! !@!  !@!   ! !@!  !@!  !!!    !!!    !!!@!!!!  "
+echo -e "\e[91m!!:     !!:  !!:  !!!  !!:     !!:  !!:     !!:  !!:  !!!    !!:    !!:  !!!  "
+echo -e "\e[91m:!:     :!:  :!:  !:!  :!:     :!:  :!:     :!:  :!:  !:!    :!:    :!:  !:!  "
+echo -e "\e[91m:::     ::   ::   :::  :::     ::   :::     ::   ::::: ::     ::    ::   :::  "
+echo -e "\e[91m :      :     :   : :   :      :     :      :     : :  :      :      :   : :  "
+                                                                              
+
+
 #----[THEME]----#
 ZSH_THEME="DJ"
+
+#----[EDIT->MICRO]----#
+alias edit="micro"
 
 #----[CLR->CLEAR]----#
 alias clr="clear"
@@ -23,8 +39,13 @@ com()
 	fi
 }
 
+alias at="cd ~/Documents/AimTux/"
+
 #----[install - dpkg -i]----#
 alias install="sudo dpkg -i"
+
+#----[nt - new terminal]----#
+alias nt="gnome-terminal $(pwd)"
 
 #----[ipa - IP ADDRESS]----#
 alias ipa="curl https://api.ipify.org"
