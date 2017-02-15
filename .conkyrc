@@ -5,7 +5,7 @@ background no
 max_text_width 0
 
 # Update interval in seconds
-update_interval 0.5
+update_interval 1.0
 
 # This is the number of times Conky will update before quitting.
 # Set to zero to run forever.
@@ -29,7 +29,7 @@ override_utf8_locale no
 
 # number of cpu samples to average
 # set to 1 to disable averaging
-cpu_avg_samples 2
+cpu_avg_samples 1
 
 # Stuff after 'TEXT' will be formatted on screen
 TEXT
@@ -37,22 +37,10 @@ TEXT
 # JSON for i3bar
 [
   {
-    "full_text" : "     ${scroll 1 1 .|.}", "color" : "\#ffffff"
-  },
-  {
-    "full_text" : "  ${scroll 8 1 ${exec cat /etc/hostname}}", "color" : "\#ffffff"
-  },
-  {
-    "full_text" : "  ${scroll 1 1 .|.}", "color" : "\#ffffff"
-  },
-  {
     "full_text" : "      CPU ${cpu}% ${cpubar} ", "color" : "\#bbbbbb"
   },
   {
     "full_text" : "     ${exec ~/.config/i3/scripts/volume.sh} ", "color" : "\#ffffff"
-  },
-  {
-    "full_text" : "     Kernel ${scroll 16 1 ${exec uname} ${exec uname -r}} ", "color" : "\#ffffff"
   },
   {
     "full_text" : "      ${exec whoami}" , "color" : "\#bbbbbb"
@@ -69,5 +57,4 @@ TEXT
   {
     "full_text" : " "
   }
-  
 ],
