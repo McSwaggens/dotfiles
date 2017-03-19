@@ -1,17 +1,31 @@
 //Personal config created by Daniel Jones
 {
-    "r.cursorStyle": "block",
+    "editor.cursorStyle": "block",
     "editor.tabSize": 4,
-    "editor.fontFamily": "Menlo",
+    "window.zoomLevel": 3,
+    "editor.fontFamily": "DeJaVu Sans Mono",
     "explorer.autoReveal": false,
     "telemetry.enableTelemetry": false,
     "telemetry.enableCrashReporter": false,
-    "terminal.integrated.fontFamily": "Menlo",
+    "terminal.integrated.fontFamily": "DeJaVu Sans Mono",
     "editor.insertSpaces": false,
-    "editor.cursorBlinking": "visible",
-    "editor.renderWhitespace": true,
-    "editor.wordBasedSuggestions": false,
+    "editor.cursorBlinking": "blink",
+    "window.menuBarVisibility": "toggle",
+    "workbench.activityBar.visible": false,
+    "workbench.statusBar.visible": false,
+    "editor.renderWhitespace": "all",
+    "editor.wordBasedSuggestions": true,
     "editor.quickSuggestionsDelay": 0,
     "editor.scrollBeyondLastLine": false,
-    "editor.trimAutoWhitespace": false
+    "editor.trimAutoWhitespace": false,
+    "editor.tabCompletion": true,
+    "editor.autoClosingBrackets": true,
+    "editor.acceptSuggestionOnEnter": true,
+    "editor.quickSuggestions": true,
+    "workbench.welcome.enabled": false,
+    "workbench.editor.showTabs": false,
+    "workbench.colorTheme": "Blueprint",
+    "[cpp]": {
+		  "C_Cpp.autocomplete": "enabled"
+	  }
 }

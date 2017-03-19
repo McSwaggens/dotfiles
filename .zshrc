@@ -38,7 +38,7 @@ initializeANSI
 sleep 0.03
 
 # Rainbow line
-printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' - | lolcat -a --duration=9
+#printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' - | lolcat -a --duration=9
 
 clear
 
@@ -54,6 +54,8 @@ EOF
 # Print out some simple information
 echo -e " ${boldon}${bluef} User: $(whoami) ${whitef}-> ${bluef}$(uname --nodename)${reset}"
 
+alias c="cmake .;make -j 12;"
+alias code="visual-studio-code-git"
 
 #----[THEME]----#
 ZSH_THEME="DJ"
