@@ -1,0 +1,137 @@
+set $mod Mod4
+
+output DP-1 {
+	resolution 3840x2160@144Hz scale 1.0
+	bg #111111 solid_color
+	bg /home/daniel/.config/sway/wallpaper2.jpg fill
+}
+
+output DP-2 {
+	resolution 3840x2160@144Hz scale 1.0
+	bg #111111 solid_color
+	bg /home/daniel/.config/sway/wallpaper.jpg fill
+}
+
+# seat seat0 xcursor_theme Simple-and-Soft 40 # Only partially works, typical Linux software.
+
+# exec swayidle -w \
+#          timeout 300 'swaylock -f -c 000000' \
+#          timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+#          before-sleep 'swaylock -f -c 000000'
+exec swayidle -w timeout 1200 'swaymsg "output * power off"' resume 'swaymsg "output * power on"'
+# gaps inner 20
+# smart_gaps on
+# smart_borders off
+default_border pixel 3
+
+#                       border  bg      text    indicator
+client.focused          #CC5B48 #CC5B48 #111111 #CC5B48
+client.focused_inactive #272727 #272727 #808080 #171717
+client.unfocused        #171717 #171717 #808080 #171717
+client.urgent           #6175BF #6175BF #808080 #6175BF
+
+input "3141:30354:SONiX_USB_Keyboard" {
+	repeat_rate 30
+	repeat_delay 300
+	xkb_options ctrl:nocaps
+}
+
+input "1278:33:PFU_Limited_HHKB-Hybrid_Keyboard" {
+	repeat_rate 30
+	repeat_delay 300
+}
+
+input "1278:33:PFU_Limited_HHKB-Hybrid_Consumer_Control" {
+	repeat_rate 30
+	repeat_delay 300
+}
+
+input "1278:33:PFU_Limited_HHKB-Hybrid" {
+	repeat_rate 30
+	repeat_delay 300
+}
+
+bindsym $mod+Return exec kitty
+bindsym $mod+q kill
+bindsym $mod+p exec rofi -show run  | xargs swaymsg exec --
+bindsym $mod+c exec rofi -show calc | xargs swaymsg exec --
+
+floating_modifier $mod normal
+
+bindsym $mod+Shift+r reload
+bindsym $mod+Shift+q exec swaymsg exit
+
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 10
+
+bindsym $mod+d splith
+bindsym $mod+s splitv
+
+bindsym $mod+w layout stacking
+bindsym $mod+t layout tabbed
+bindsym $mod+e layout toggle split
+
+bindsym $mod+f fullscreen
+
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+
+bindsym $mod+a focus parent
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+
+bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPlay exec playerctl play-pause
+
+mode "resize" {
+    bindsym h resize shrink width  50px
+    bindsym j resize grow   height 50px
+    bindsym k resize shrink height 50px
+    bindsym l resize grow   width  50px
+    bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+bar {
+    position top
+    status_command while date +'%B | %d/%m/%Y | %A | %l:%M %p '; do sleep 8; done
+    font Consolas 18
+    colors {
+        statusline #999999FF
+        background #111111EE
+        inactive_workspace #111111DD #111111DD #999999FF
+        active_workspace   #CC5B48DD #111111DD #999999FF
+        focused_workspace  #CC5B48DD #CC5B48DD #111111FF
+    }
+}
+
+include /etc/sway/config.d/*

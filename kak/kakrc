@@ -1,0 +1,132 @@
+set-option global tabstop      4
+set-option global indentwidth  0
+set-option global aligntab     false
+set-option global scrolloff    6,0
+set-option global ui_options   ncurses_status_on_top=false ncurses_assistant=none ncurses_enable_mouse=yes ncurses_set_title=no
+set-option global incsearch    true
+# set-option global idle_timeout 100
+set-option global modelinefmt  '%val{cursor_line}:%val{cursor_char_column}+%val{selection_length} | {{mode_info}} | %val{bufname} {{context_info}} | %val{client}@%val{session}'
+# colorscheme red-phoenix
+colorscheme embers
+
+add-highlighter global/ line '%val{cursor_line}' default,rgb:101010
+add-highlighter global/ wrap -word -indent
+add-highlighter global/ show-matching
+# add-highlighter global/ number-lines -hlcursor
+# add-highlighter global/ show-whitespaces -spc ' ' -lf ' '
+
+source ~/.config/kak/qualia.kak
+source ~/.config/kak/vertical-selection.kak
+
+require-module wayland
+# set-option global wayland_window_type 'os-window'
+require-module kitty
+set-option global kitty_window_type 'os-window'
+
+declare-user-mode filter
+map global normal = ': enter-user-mode filter<ret>'
+map global filter = -docstring 'Calculate (Decimal)'    '|calc -p<ret>'
+map global filter b -docstring 'Calculate (Hexdecimal)' '|calc -p "_=base(2)"<ret>'
+map global filter h -docstring 'Calculate (Binary)'     '|calc -p "_=base(16)"<ret>'
+map global filter r -docstring 'Reverse'                '|tac<ret>'
+
+map global insert <s-ret> <ret>
+map global insert <s-backspace> <backspace>
+map global prompt <s-ret> <ret>
+map global prompt <s-backspace> <backspace>
+
+map global normal v     ': vertical-selection-down<ret>'
+map global normal <a-v> ': vertical-selection-up<ret>'
+map global normal V     ': vertical-selection-up-and-down<ret>'
+
+define-command term        %{ terminal fish; }
+define-command config      %{ e ~/.config/kak/kakrc; }
+define-command set-main    %{ rename-client main;   set-option global jumpclient  main;   }
+define-command set-maker   %{ rename-client maker;  set-option global toolsclient maker;  }
+define-command new-maker   %{ new set-maker  }
+define-command set-doc     %{ rename-client doctor; set-option global docsclient  doctor; }
+define-command set-makecmd %{ prompt -init 'make' -shell-completion 'makecmd ' 'set-option global makecmd %val{text}'; }
+define-command mkdir       %{ nop %sh{ mkdir -p $(dirname $kak_buffile) } }
+
+define-command transparent-background %{
+	set-face global Default default,default
+	set-face global BufferPadding default,default
+}
+
+define-command gst %{
+	git status
+}
+
+define-command c-mode %{
+	hook global WinSetOption filetype=c %{
+		clang-enable-autocomplete
+		# clang-enable-diagnostics
+		# ctags-enable-autocomplete
+		# set-option global c_include_guard_style pragma
+		set-option global clang_options '-x c -std=c99 -nostdinc -Wno-pragma-once-outside-header'
+	}
+}
+
+define-command cpp-mode %{
+	hook global WinSetOption filetype=(c|cpp) %{
+		clang-enable-autocomplete
+		# clang-enable-diagnostics
+		# ctags-enable-autocomplete
+		# set-option global c_include_guard_style pragma
+		set-option global clang_options '-x c++ -std=c++20 -nostdinc -nostdinc++ -Wno-pragma-once-outside-header'
+	}
+}
+
+define-command ide %{
+	set-main
+	new set-maker
+	new e test.q
+	hook global BufWritePost .* %{ make run; clang-parse; ctags-update-tags }
+}
+
+# set-option global autoclose true
+# set-option global autoclose_pairs '(' ')' '{' '}' '[' ']'
+
+unmap global normal <up>
+unmap global normal <down>
+unmap global normal <left>
+unmap global normal <right>
+
+unmap global normal <s-up>
+unmap global normal <s-down>
+unmap global normal <s-left>
+unmap global normal <s-right>
+
+map global normal '\'     -docstring 'select all'     '_"fZ*%s<ret>Z"fz<a-z>a'
+map global normal <F1>    -docstring 'compile'        ': make<ret>'
+map global normal <F2>    -docstring 'compile & run'  ': make run<ret>'
+map global normal <S-tab> -docstring 'previous buffer' ': buffer-previous<ret>'
+map global normal <tab>   -docstring 'next buffer'     ': buffer-next<ret>'
+
+map global user c -docstring 'comment line'   ': comment-line<ret>'
+map global user d -docstring 'delete buffer'  ': db<ret>'
+map global user u -docstring 'update ctags'   ': ctags-update-tags<ret>'
+
+map global goto g -docstring 'center screen'  '<esc>\vv'
+map global goto d -docstring 'search ctags'   '<esc>_<a-i>w: ctags-search<ret><ret>'
+# map global goto p -docstring 'previous error' '<esc>: clang-diagnostics-next<ret>'
+# map global goto n -docstring 'next error'     '<esc>: clang-diagnostics-next<ret>'
+map global goto p -docstring 'previous error' '<esc>: make-previous-error<ret>'
+map global goto n -docstring 'next error'     '<esc>: make-next-error<ret>'
+map global goto o -docstring 'goto header'    '<esc>: c-alternative-file<ret>'
+
+hook global InsertCompletionShow .* %{
+	try %{
+		execute-keys -draft 'h<a-K>\h<ret>'
+		map window insert <tab> <c-n>
+		map window insert <s-tab> <c-p>
+	}
+}
+
+hook global InsertCompletionHide .* %{
+	unmap window insert <tab> <c-n>
+	unmap window insert <s-tab> <c-p>
+}
+
+try %{ source .kakrc }
+
