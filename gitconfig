@@ -1,0 +1,12 @@
+[user]
+	email = McSwaggens@protonmail.com
+	name = McSwaggens
+[credential]
+	username = McSwaggens
+[merge]
+	conflictstyle = zdiff3
+[commit]
+	verbose = true
+[diff]
+	algorithm = histogram
+	autoSetupRemote = true
