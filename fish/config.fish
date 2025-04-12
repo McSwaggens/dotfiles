@@ -4,12 +4,24 @@ alias clr    'clear'
 alias uefi   'systemctl reboot --firmware-setup'
 alias config 'kak ~/.config/fish/config.fish'
 
-function xx
+function s
 	command kak -e "grep $argv"
+end
+
+function xx
+	command kak -e "xx $argv"
 end
 
 function d
 	command kak -e "git diff $argv"
+end
+
+function ds
+	command kak -e "git diff --staged $argv"
+end
+
+function dm
+	command kak -e "git diff master $argv"
 end
 
 function man
