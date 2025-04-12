@@ -8,16 +8,17 @@ set-option global ui_options   ncurses_status_on_top=false ncurses_assistant=non
 set-option global incsearch    true
 # set-option global idle_timeout 100
 set-option global modelinefmt  '%val{cursor_line}:%val{cursor_char_column}+%val{selection_length} | {{mode_info}} | %val{bufname} {{context_info}} | %val{client}@%val{session}'
-colorscheme daniel
+# colorscheme daniel
+colorscheme embers
 
 set-option global makecmd 'make -j32'
 set-option global grepcmd 'rg -n'
 
-add-highlighter global/ line '%val{cursor_line}' default,rgb:101010
+# add-highlighter global/ line '%val{cursor_line}' default,rgb:101010
 add-highlighter global/ wrap -word -indent
 add-highlighter global/ show-matching
-add-highlighter global/ show-whitespaces -spc ' ' -lf ' '
-# add-highlighter global/ number-lines -hlcursor
+# add-highlighter global/ show-whitespaces -spc ' ' -lf ' '
+add-highlighter global/ number-lines -hlcursor
 
 # source ~/.config/kak/qualia.kak
 source ~/.config/kak/vertical-selection.kak
@@ -55,22 +56,20 @@ alias global p gdb-print
 alias global br gdb-toggle-breakpoint
 alias global finish gdb-finish
 alias global f flygrep
-map global user b ': gdb-toggle-breakpoint<ret>' -docstring 'Toggle Breakpoint.'
-map global normal <down>  ': gdb-next<ret>'
-map global normal <right> ': gdb-step<ret>'
-gdb-enable-autojump
 
 define-command set-main    %{ rename-client main;   set-option global jumpclient  main;   }
 define-command set-maker   %{ rename-client maker;  set-option global toolsclient maker;  }
 define-command set-doc     %{ rename-client doctor; set-option global docsclient  doctor; }
 
-define-command d  -params 0..1 %{ git diff --submodule=diff %arg{@} }
+define-command d  -params 0..1 %{ git diff          --submodule=diff %arg{@} }
+define-command ds -params 0..1 %{ git diff --staged --submodule=diff %arg{@} }
+define-command dm -params 0..1 %{ git diff master   --submodule=diff %arg{@} }
 define-command co -params 0..1 %{ git checkout %arg{@} }
 define-command gst %{ git status }
 
-define-command auto-make %{ 
-	hook global BufWritePost .* %{ make }
-}
+# define-command auto-make %{
+# 	hook global BufWritePost .* %{ make }
+# }
 
 define-command ide %{
 	set-main
@@ -81,8 +80,7 @@ define-command ide %{
 
 map global normal '*' '<c-s>*'
 map global normal '\'     -docstring 'select all'     '<c-s>_"fZ*%s<ret>Z"fz<a-z>a'
-map global normal <tab>   -docstring 'next buffer'     ':b <tab>'
-map global normal <S-tab> -docstring 'previous buffer' ':b <tab>'
+map global normal <tab>   -docstring 'next buffer'     ':b '
 map global normal <space> ','
 map global normal ',' ': enter-user-mode user<ret>'
 
@@ -98,6 +96,7 @@ map global user u -docstring 'update ctags'   ': ctags-update-tags<ret>'
 map global user x -docstring 'execute c code' '!tcc -run -<ret>'
 map global user X -docstring 'execute and replace c code.' '|tcc -run -<ret>'
 
+map global goto s -docstring 'grep'           '<esc>: grep<ret>'
 map global goto g -docstring 'center screen'  '<esc>\vv'
 map global goto d -docstring 'search ctags'   '<esc><c-s>_<a-i>w:ctags-search<ret><tab>'
 map global goto p -docstring 'previous error' '<esc>: make-previous-error<ret>'
