@@ -1,15 +1,19 @@
 set $mod Mod4
 
+focus_wrapping no
+
 output DP-1 {
 	resolution 3840x2160@144Hz scale 1.0
+	position 0 0
 	bg #111111 solid_color
-	bg /home/daniel/.config/sway/wallpaper2.jpg fill
+	# bg /home/daniel/.config/sway/1255270.png fill
 }
 
 output DP-2 {
 	resolution 3840x2160@144Hz scale 1.0
+	position 3840 0
 	bg #111111 solid_color
-	bg /home/daniel/.config/sway/wallpaper.jpg fill
+	# bg /home/daniel/.config/sway/1255270.png fill
 }
 
 # seat seat0 xcursor_theme Simple-and-Soft 40 # Only partially works, typical Linux software.
@@ -30,25 +34,10 @@ client.focused_inactive #272727 #272727 #808080 #171717
 client.unfocused        #171717 #171717 #808080 #171717
 client.urgent           #6175BF #6175BF #808080 #6175BF
 
-input "3141:30354:SONiX_USB_Keyboard" {
+input type:keyboard {
 	repeat_rate 30
-	repeat_delay 300
+	repeat_delay 220
 	xkb_options ctrl:nocaps
-}
-
-input "1278:33:PFU_Limited_HHKB-Hybrid_Keyboard" {
-	repeat_rate 30
-	repeat_delay 300
-}
-
-input "1278:33:PFU_Limited_HHKB-Hybrid_Consumer_Control" {
-	repeat_rate 30
-	repeat_delay 300
-}
-
-input "1278:33:PFU_Limited_HHKB-Hybrid" {
-	repeat_rate 30
-	repeat_delay 300
 }
 
 bindsym $mod+Return exec kitty
