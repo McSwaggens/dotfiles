@@ -1,28 +1,33 @@
-face global Default             rgb:BABABA,default # rgb:1A1A1F
+face global Default             rgb:BABABA,default
+# face global Default             rgb:d2d2d2,rgb:000000
 face global BufferPadding       rgb:333333,default
 
 face global PrimaryCursor       rgb:111111,rgb:CCCCCC
 face global PrimarySelection    rgb:d4d4d4,rgb:264f78+g
-# face global PrimaryCursorEol    rgb:EE8888,rgb:EE8888
 
 face global SecondaryCursor     rgb:111111,rgb:AAAAAA
 face global SecondarySelection  rgb:d4d4d4,rgb:3a3d41
-# face global SecondaryCursorEol  rgb:FFFF00,rgb:FFFF00
 
-# face global	value	         rgb:b5cea8
+# red:    BA4444
+# yellow: d9d8b3
+# brown:  a08071
+
 face global value            rgb:D09990
+face global variable         rgb:BABABA
+face global constant         rgb:BB62C3
+face global member_variable  rgb:BABABA+i
+face global function         rgb:BABABA
 face global type             rgb:569cd6
+face global user_type        rgb:3DC9B0 # 90bdac
+face global parameter        rgb:909090
 face global identifier       rgb:dedede
 face global string           rgb:D09990
 face global module           rgb:D09990
 face global error            rgb:cc6666
 face global keyword          rgb:569cd6
-# face global operator         rgb:ff9999+b
 face global operator         rgb:569cd6
 face global attribute        rgb:569cd6
-# face global comment          rgb:555557
 face global comment          rgb:57A64A
-# face global comment          rgb:6B6B6B #608B4E
 face global meta             rgb:6B6B6B
 
 face global title            rgb:66CC66+b
@@ -59,17 +64,17 @@ hook -group c-highlight global ModuleLoaded c-family %{
 	add-highlighter shared/cpp/code/Keyword regex '\b(true|false|null|byte)\b' 0:keyword
 	add-highlighter shared/c/code/Keyword   ref cpp/code/Keyword
 
-	add-highlighter shared/cpp/code/Primitive regex '\b(u?int|float|u|s)\d+(_t)?\b' 0:keyword
+	add-highlighter shared/cpp/code/Primitive regex '\b(u?int|float|u|s|f)\d+(_t)?\b' 0:keyword
 	add-highlighter shared/c/code/Primitive   ref   cpp/code/Primitive
 
-	add-highlighter shared/cpp/code/Punctuation regex ',|->|\.|\*|/|\+|-|%|\|\||&|<|>|=|!=|^' 0:rgb:666666
-	add-highlighter shared/c/code/Punctuation   ref cpp/code/Punctuation
+	# add-highlighter shared/cpp/code/Punctuation regex ',|->|\.|\*|/|\+|-|%|\|\||&|<|>|=|!=|^' 0:rgb:666666
+	# add-highlighter shared/c/code/Punctuation   ref cpp/code/Punctuation
 
-	add-highlighter shared/cpp/code/Type regex '\b([A-Z](\w|_)+[a-z](\w|_)*|\w+_t)(?!\()\b' 0:rgb:3DC9B0
-	add-highlighter shared/c/code/Type   ref cpp/code/Type
+	# add-highlighter shared/cpp/code/Type regex '\b([A-Z](\w|_)+[a-z](\w|_)*|\w+_t)(?!\()\b' 0:rgb:3DC9B0
+	# add-highlighter shared/c/code/Type   ref cpp/code/Type
 
-	add-highlighter shared/cpp/code/Constant regex '\b[A-Z][A-Z\d_]+\b' 0:rgb:BB62C3
-	add-highlighter shared/c/code/Constant   ref cpp/code/Constant
+	# add-highlighter shared/cpp/code/Constant regex '\b[A-Z][A-Z\d_]+\b' 0:rgb:BB62C3
+	# add-highlighter shared/c/code/Constant   ref cpp/code/Constant
 
 	# add-highlighter shared/cpp/line_comment regex '//(?S).*(@(Todo|Note|Warning|FixMe|RemoveMe|Bug|OptimizeMe)):?' 1:rgb:DE7CEB
 

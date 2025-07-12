@@ -19,53 +19,53 @@ evaluate-commands %sh{
 	base_brown='rgb:825757'
 
 	echo "
-		face global	value ${base_orange}
-		face global	type ${base_yellow}
-		face global	identifier ${base_red}
-		face global	string ${base_green}
-		face global	error ${base_grey},${base_green}
-		face global	keyword	${base_purple}
-		face global	operator ${base_grey}
-		face global	attribute ${base_orange}
-		face global	comment	${comments}
-		face global	meta ${base_yellow}
-		face global	module ${base_green}
-		face global	variable rgb:BA4444+i
-		face global	function rgb:BA4444+f
+		face global value      ${base_orange}
+		face global type       ${base_yellow}
+		face global identifier ${base_red}
+		face global string     ${base_green}
+		face global error      ${base_grey},${base_green}
+		face global keyword    ${base_purple}
+		face global operator   ${base_grey}
+		face global attribute  ${base_orange}
+		face global comment    ${comments}
+		face global meta       ${base_yellow}
+		face global module     ${base_green}
+		face global variable   rgb:BA4444+i
+		face global function   rgb:BA4444+f
 
-		face global	title ${base_blue}
-		face global	header ${base_blue}
-		face global	bold ${base_yellow}
-		face global	italic ${base_orange}
-		face global	mono ${base_green}
-		face global	block ${base_orange}
-		face global	link ${base_blue}
-		face global	bullet ${base_green}
-		face global	list ${base_red}
+		face global title  ${base_blue}
+		face global header ${base_blue}
+		face global bold   ${base_yellow}
+		face global italic ${base_orange}
+		face global mono   ${base_green}
+		face global block  ${base_orange}
+		face global link   ${base_blue}
+		face global bullet ${base_green}
+		face global list   ${base_red}
 
-		face global	Default	${base_grey},${base_background}
-		face global BufferPadding	${base_background},${base_background}
-		face global	PrimarySelection ${base_white},${base_blue}
-		face global	SecondarySelection ${base_grey},${base_blue}
-		face global	PrimaryCursor rgb:16130F,${base_white}
-		face global	SecondaryCursor	rgb:16130F,${base_grey}
-		face global	LineNumbers	${base_background},${base_background}
-		face global	LineNumberCursor ${base_background},rgb:282828+b
-		face global	MenuForeground ${base_white},${base_blue}
-		face global	MenuBackground ${base_blue},${base_light_black}
-		face global	StatusLine ${base_light_grey},${base_background}
-		face global	StatusLineMode ${base_yellow}
-		face global	StatusLineInfo ${base_blue}
-		face global	StatusLineValue	${base_green}
-		face global	StatusCursor ${selection_black},${base_blue}
-		face global	MenuInfo ${base_blue}
-		face global	Information	${base_background},${base_blue}
-		face global	Error ${base_light_black},${base_red}
-		face global	Prompt ${base_yellow},${base_background}
-		face global	MatchingChar ${base_blue},${base_background}+b
-		# face global	BufferPadding ${base_background},${base_background}
+		face global Default            ${base_grey},${base_background}
+		face global BufferPadding      ${base_background},${base_background}
+		face global PrimarySelection   ${base_white},${base_blue}
+		face global SecondarySelection ${base_grey},${base_blue}
+		face global PrimaryCursor      rgb:16130F,${base_white}
+		face global SecondaryCursor    rgb:16130F,${base_grey}
+		face global LineNumbers        ${base_background},${base_background}
+		face global LineNumberCursor   ${base_background},rgb:282828+b
+		face global MenuForeground     ${base_white},${base_blue}
+		face global MenuBackground     ${base_blue},${base_light_black}
+		face global StatusLine         ${base_light_grey},${base_background}
+		face global StatusLineMode     ${base_yellow}
+		face global StatusLineInfo     ${base_blue}
+		face global StatusLineValue    ${base_green}
+		face global StatusCursor       ${selection_black},${base_blue}
+		face global MenuInfo           ${base_blue}
+		face global Information        ${base_background},${base_blue}
+		face global Error              ${base_light_black},${base_red}
+		face global Prompt             ${base_yellow},${base_background}
+		face global MatchingChar       ${base_blue},${base_background}+b
+		# face global   BufferPadding ${base_background},${base_background}
 
-		hook global	ModuleLoaded c-family %{
+		hook global ModuleLoaded c-family %{
 			add-highlighter	shared/cpp/code/keyword regex '\b(null|requires|concept|co_return|co_yield|co_await)\b' 0:keyword
 
 			add-highlighter	shared/cpp/code/prims regex '\b(u|uint|i|int|s|f|float)(8|16|32|64|128|256|512)\b' 0:type

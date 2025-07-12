@@ -9,6 +9,7 @@ set-option global incsearch    true
 # set-option global idle_timeout 100
 set-option global modelinefmt  '%val{cursor_line}:%val{cursor_char_column}+%val{selection_length} | {{mode_info}} | %val{bufname} {{context_info}} | %val{client}@%val{session}'
 colorscheme daniel
+# colorscheme embers
 
 set-option global makecmd 'make -j32'
 set-option global grepcmd 'rg -n'

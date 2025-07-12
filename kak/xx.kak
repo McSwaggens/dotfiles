@@ -2,8 +2,19 @@ declare-option -docstring "shell command run to search for file" str xxcmd 'fd'
 
 provide-module xx %{
 
-require-module fifo
 require-module jump
+
+
+
+
+
+
+
+
+
+
+
+require-module fifo
 
 define-command -params .. -docstring %{
     xx [<arguments>]: xx utility wrapper
