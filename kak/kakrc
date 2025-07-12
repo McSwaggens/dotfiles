@@ -4,29 +4,30 @@ set-option global tabstop      4
 set-option global indentwidth  0
 set-option global aligntab     false
 set-option global scrolloff    6,0
-set-option global ui_options   ncurses_status_on_top=false ncurses_assistant=none ncurses_enable_mouse=yes ncurses_set_title=no
+set-option global ui_options   ncurses_status_on_top=false ncurses_assistant=none ncurses_enable_mouse=yes ncurses_set_title=no terminal_assistant=cat
 set-option global incsearch    true
 # set-option global idle_timeout 100
 set-option global modelinefmt  '%val{cursor_line}:%val{cursor_char_column}+%val{selection_length} | {{mode_info}} | %val{bufname} {{context_info}} | %val{client}@%val{session}'
-# colorscheme daniel
-colorscheme embers
+colorscheme daniel
 
 set-option global makecmd 'make -j32'
 set-option global grepcmd 'rg -n'
 
-# add-highlighter global/ line '%val{cursor_line}' default,rgb:101010
+add-highlighter global/ line '%val{cursor_line}' default,rgb:101010
 add-highlighter global/ wrap -word -indent
 add-highlighter global/ show-matching
-# add-highlighter global/ show-whitespaces -spc ' ' -lf ' '
-add-highlighter global/ number-lines -hlcursor
+add-highlighter global/ show-whitespaces -spc ' ' -lf ' '
+# add-highlighter global/ number-lines -hlcursor
 
 # source ~/.config/kak/qualia.kak
 source ~/.config/kak/vertical-selection.kak
-source ~/.config/kak/flygrep.kak
-source ~/.config/kak/gdb.kak
-source ~/.config/kak/xx.kak
+map global normal v     ': vertical-selection-down<ret>'
+map global normal <a-v> ': vertical-selection-up<ret>'
+map global normal V     ': vertical-selection-up-and-down<ret>'
 
-require-module xx
+alias global s ctags-search
+
+source ~/.config/kak/flygrep.kak
 require-module flygrep
 require-module kitty
 
@@ -45,16 +46,8 @@ map global insert <s-backspace> <backspace>
 map global prompt <s-ret> <ret>
 map global prompt <s-backspace> <backspace>
 
-map global normal v     ': vertical-selection-down<ret>'
-map global normal <a-v> ': vertical-selection-up<ret>'
-map global normal V     ': vertical-selection-up-and-down<ret>'
-
 
 alias global s ctags-search
-alias global c gdb-continue
-alias global p gdb-print
-alias global br gdb-toggle-breakpoint
-alias global finish gdb-finish
 alias global f flygrep
 
 define-command set-main    %{ rename-client main;   set-option global jumpclient  main;   }
@@ -70,6 +63,8 @@ define-command gst %{ git status }
 # define-command auto-make %{
 # 	hook global BufWritePost .* %{ make }
 # }
+
+hook global BufWritePost .*/.kakrc %{ source .kakrc }
 
 define-command ide %{
 	set-main
@@ -116,6 +111,37 @@ hook global InsertCompletionHide .* %{
 	unmap window insert <s-tab> <c-p>
 }
 
-try %{ source .kakrc }
+eval %sh{kak-lsp}
+hook global WinSetOption filetype=(rust|python|go|javascript|typescript|c|cpp) %{
+	lsp-enable-window
+	map buffer normal <ret> ':lsp-hover<ret>'
+	alias global rename lsp-rename
+	hook window -group semantic-tokens BufReload  .* lsp-semantic-tokens
+	hook window -group semantic-tokens NormalIdle .* lsp-semantic-tokens
+	hook window -group semantic-tokens InsertIdle .* lsp-semantic-tokens
+
+	set-option global lsp_semantic_tokens %{
+		[
+			{ face="const_variable_declaration", token="variable", modifiers=["constant", "declaration"] },
+			{ face="constant", token="variable", modifiers=["constant"] },
+			{ face="parameter", token="parameter" },
+			{ face="user_type", token="class" },
+			{ face="member_variable", token="property" },
+			{ face="user_type", token="enum" },
+			{ face="user_type", token="namespace" },
+			{ face="constant", token="macro" },
+			{ face="constant", token="enumMember" },
+			{ face="constant", token="constant" },
+			{ face="variable", token="variable" },
+			{ face="function", token="function" },
+		]
+	}
+}
 
 require-module sway
+
+try %{ source .kakrc }
+
+source ~/.config/kak/xx.kak
+require-module xx
+
