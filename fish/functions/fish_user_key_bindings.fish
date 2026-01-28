@@ -14,7 +14,7 @@ function fish_user_key_bindings
 
     bind \cz fg
 
-    bind -k backspace backward-delete-char
+    bind backspace backward-delete-char
     bind \eH backward-kill-word
 
     bind --erase --preset \cd
