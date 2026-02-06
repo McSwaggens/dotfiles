@@ -60,6 +60,7 @@ define-command ds -params 0..1 %{ git diff --staged --submodule=diff %arg{@} }
 define-command dm -params 0..1 %{ git diff master   --submodule=diff %arg{@} }
 define-command co -params 0..1 %{ git checkout %arg{@} }
 define-command gst %{ git status }
+define-command log %{ git log }
 
 # define-command auto-make %{
 # 	hook global BufWritePost .* %{ make }
@@ -99,18 +100,27 @@ map global goto p -docstring 'previous error' '<esc>: make-previous-error<ret>'
 map global goto n -docstring 'next error'     '<esc>: make-next-error<ret>'
 map global goto o -docstring 'goto header'    '<esc>: c-alternative-file<ret>'
 
-hook global InsertCompletionShow .* %{
+define-command -hidden tab-smart %{
 	try %{
 		execute-keys -draft 'h<a-K>\h<ret>'
-		map window insert <tab> <c-n>
-		map window insert <s-tab> <c-p>
+		lsp-snippets-select-next-placeholders
+	} catch %{
+		execute-keys '<tab>'
 	}
+}
+
+map global insert <tab> '<a-;>:tab-smart<ret>'
+
+hook global InsertCompletionShow .* %{
+	map window insert <tab> <c-n>
+	map window insert <s-tab> <c-p>
 }
 
 hook global InsertCompletionHide .* %{
 	unmap window insert <tab> <c-n>
 	unmap window insert <s-tab> <c-p>
 }
+
 
 eval %sh{kak-lsp}
 hook global WinSetOption filetype=(rust|python|go|javascript|typescript|c|cpp) %{
@@ -124,9 +134,11 @@ hook global WinSetOption filetype=(rust|python|go|javascript|typescript|c|cpp) %
 	set-option global lsp_semantic_tokens %{
 		[
 			{ face="const_variable_declaration", token="variable", modifiers=["constant", "declaration"] },
-			{ face="constant", token="variable", modifiers=["constant"] },
+			{ face="constant", token="variable", modifiers=["readonly"] },
 			{ face="parameter", token="parameter" },
 			{ face="user_type", token="class" },
+			{ face="user_type", token="type", modifiers=["userDefined"] },
+			{ face="user_type", token="typeParameter" },
 			{ face="member_variable", token="property" },
 			{ face="user_type", token="enum" },
 			{ face="user_type", token="namespace" },

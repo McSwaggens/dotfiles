@@ -15,11 +15,11 @@ face global SecondarySelection  rgb:d4d4d4,rgb:3a3d41
 face global value            rgb:D09990
 face global variable         rgb:BABABA
 face global constant         rgb:BB62C3
-face global member_variable  rgb:BABABA+i
+face global member_variable  rgb:BABABA
 face global function         rgb:BABABA
 face global type             rgb:569cd6
 face global user_type        rgb:3DC9B0 # 90bdac
-face global parameter        rgb:909090
+face global parameter        rgb:909090+i
 face global identifier       rgb:dedede
 face global string           rgb:D09990
 face global module           rgb:D09990
@@ -97,6 +97,6 @@ hook -group c-highlight global ModuleLoaded c-family %{
 
 hook -group c-highlight global WinSetOption filetype=(c|cpp) %{
 	add-highlighter window/ regex '@(Todo|Note|TestMe|OptimizeMe|\w+)\b' 0:default+b
-	add-highlighter window/ regex '@(Warning|RemoveMe)\b' 0:rgb:E39D10+b
-	add-highlighter window/ regex '@(FixMe|Bug)\b' 0:rgb:D02222+b
+	add-highlighter window/ regex '@(Warning|RemoveMe|warning|cleanup|cleanme)\b' 0:rgb:E39D10+b
+	add-highlighter window/ regex '@(removeme|todo|fixme|bug|FixMe|Bug)\b' 0:rgb:D02222+bc
 }

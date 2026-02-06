@@ -6,6 +6,8 @@ alias clr    'clear'
 alias uefi   'systemctl reboot --firmware-setup'
 alias config 'kak ~/.config/fish/config.fish'
 alias dc     'make clean'
+alias log    'kak -e "git log"'
+alias rs     'git restore --staged'
 
 function s
 	command kak -e "grep $argv"
@@ -59,6 +61,14 @@ function fish_prompt
 end
 
 fish_add_path -m ~/.local/bin
+
+if not set -q SSH_AUTH_SOCK
+    eval (ssh-agent -c) > /dev/null
+    set -Ux SSH_AUTH_SOCK $SSH_AUTH_SOCK
+    set -Ux SSH_AGENT_PID $SSH_AGENT_PID
+end
+
+eval (keychain --eval --quiet id_ed25519)
 
 export EDITOR=kak
 export MOZ_ENABLE_WAYLAND=1
